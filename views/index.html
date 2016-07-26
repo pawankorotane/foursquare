@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<div class="row ">
+    <div class="col-sm-3 well ">
+        <form class="form-horizontal" novalidate ng-submit="fetchPlaces()" name='queryForm'>
+            <div class="form-group">
+                <label for="exampleInputName2" class="control-label">Search Place:</label>
+                <input type="text" class="form-control" id="exampleInputName2" ng-model="query.name" placeholder="Looking for.." required>
+            </div>
+            <button type="submit" class="btn btn-primary" ng-disabled="queryForm.$invalid" >Search</button>
+        </form>
+    </div>
+    <div class="col-sm-8">
+        <div data-ng-if="loading">
+            Loading...
+        </div>
+        <div class="list-group">
+            <a href="#" class="list-group-item" ng-repeat="p in places.venues">
+                <h4 class="list-group-item-heading text-success"><span class="text-primary">{{p.name}} </span></h4>
+                <p class="list-group-item-text">{{p.location.formattedAddress.join(', ')}}</p>
+                <span class="label label-success" ng-repeat="c in p.categories">{{c.shortName}}</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
